@@ -29,20 +29,71 @@ OE_SERVERTYPE="openerp-gevent"
 #Enter version for checkout "7.0" for version 7.0, "saas-4, saas-5 (opendays version) and "master" for trunk
 OE_VERSION="8.0"
 
+# Enter version for checkout ngx_cache_purge module for building Nginx with the cache_purge module
+NCP_VERSION="2.1"
+
+# Enter version for checkout ngx_pagespeed module for building Nginx with Google Pagespeed
+NPS_VERSION="1.9.32.2"
+
 #set the superadmin password
 OE_SUPERADMIN="superadminpassword"
 OE_CONFIG="$OE_USER-server"
 
 #--------------------------------------------------
+# Software Package Repository
+# Install Nginx + ngx_pagespeed + ngx_cache_purge
+# from source on Ubuntu 14.04 LTS
+#--------------------------------------------------
+sudo -s
+ echo "deb http://nginx.org/packages/mainline/ubuntu/ `lsb_release -sc` nginx" \
+    > /etc/apt/sources.list.d/nginx.org-mainline.list
+echo "deb-src http://nginx.org/packages/mainline/ubuntu/ `lsb_release -sc` nginx" \
+    >> /etc/apt/sources.list.d/nginx.org-mainline.list
+exit
+
+#--------------------------------------------------
+# All software packages released by the project are signed with a GPG key.
+# Add the signing key to the systems trusted keyring:
+#--------------------------------------------------
+wget -O - http://nginx.org/keys/nginx_signing.key | sudo apt-key add -
+wget -O - http://nginx.org/keys/nginx_signing.key | \
+    gpg --no-default-keyring --keyring ~/.gnupg/trustedkeys.gpg --import -
+# Update system packages list
+sudo apt-get update -y
+# Install requirements for building packages from source
+sudo apt-get install build-essential devscripts unzip -y
+# Get all the stuff needed for building the nginx package
+sudo apt-get build-dep nginx -y
+# prepare the source code directory for building the nginx package
+sudo mkdir -p /usr/local/src
+sudo chown $USER /usr/local/src
+sudo chmod u+rwx /usr/local/src
+cd /usr/local/src
+# Get the nginx package source code
+sudo apt-get source nginx
+# Download the source code for the ngx_cache_purge module
+wget -O ngx_cache_purge-${NCP_VERSION}.zip \
+    https://github.com/FRiCKLE/ngx_cache_purge/archive/${NCP_VERSION}.zip
+unzip ngx_cache_purge-${NCP_VERSION}.zip
+# Download the source code for the Google pagespeed module
+wget -O ngx_pagespeed-${NPS_VERSION}-beta.zip \
+    https://github.com/pagespeed/ngx_pagespeed/archive/release-${NPS_VERSION}-beta.zip
+unzip ngx_pagespeed-${NPS_VERSION}-beta.zip
+cd ngx_pagespeed-release-${NPS_VERSION}-beta/
+wget https://dl.google.com/dl/page-speed/psol/${NPS_VERSION}.tar.gz
+tar -xzvf ${NPS_VERSION}.tar.gz
+cd ..
+
+#--------------------------------------------------
 # Set Locale en_US.UTF-8
 #--------------------------------------------------
-echo -e "\n---- Set en_US.UTF-8 Locale ----"
-sudo cp /etc/default/locale /etc/default/locale.BACKUP
-sudo rm -rf /etc/default/locale
-echo -e "* Change server config file"
-sudo su root -c "echo 'LC_ALL="en_US.UTF-8"' >> /etc/default/locale"
-sudo su root -c "echo 'LANG="en_US.UTF-8"' >> /etc/default/locale"
-sudo su root -c "echo 'LANGUAGE="en_US:en"' >> /etc/default/locale"
+# echo -e "\n---- Set en_US.UTF-8 Locale ----"
+# sudo cp /etc/default/locale /etc/default/locale.BACKUP
+# sudo rm -rf /etc/default/locale
+# echo -e "* Change server config file"
+# sudo su root -c "echo 'LC_ALL="en_US.UTF-8"' >> /etc/default/locale"
+# sudo su root -c "echo 'LANG="en_US.UTF-8"' >> /etc/default/locale"
+# sudo su root -c "echo 'LANGUAGE="en_US:en"' >> /etc/default/locale"
 
 #--------------------------------------------------
 # START - LibreOffice-Python 2.7 Compatibility Script Author: Holger Brunn (https://gist.github.com/hbrunn/6f4a007a6ff7f75c0f8b)
