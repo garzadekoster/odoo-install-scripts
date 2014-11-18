@@ -87,6 +87,7 @@ cd ..
 ## 
 sudo sed -i s/"--with-ipv6    "/"--with-ipv6 \    "/g /usr/local/src/nginx-1.7.7/debian/rules
 sudo sed -i s/"--with-debug "/"--with-debug \\"/g /usr/local/src/nginx-1.7.7/debian/rules
+sudo sed -i s/"\<--\with\-\debug\>"/"\<--\with\-\debug\> /\\"/g /usr/local/src/nginx-1.7.7/debian/rules
 sudo sed -i '/--with-ipv6/a\                --add-module=/usr/local/src/ngx_cache_purge-2.1 \ \' /usr/local/src/nginx-1.7.7/debian/rules
 sudo sed -i '/--with-debug/a\                --add-module=/usr/local/src/ngx_cache_purge-2.1 \ \' /usr/local/src/nginx-1.7.7/debian/rules
 sudo sed -i '/--add-module=/usr/local/src/ngx_cache_purge-2.1 \ \                         --add-module=/usr/local/src/ngx_pagespeed-1.9.32.2-beta \' /usr/local/src/nginx-1.7.7/debian/rules
