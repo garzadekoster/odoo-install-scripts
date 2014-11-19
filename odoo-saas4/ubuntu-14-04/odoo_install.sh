@@ -84,13 +84,20 @@ wget https://dl.google.com/dl/page-speed/psol/${NPS_VERSION}.tar.gz
 tar -xzvf ${NPS_VERSION}.tar.gz
 cd ..
 
-## 
-sudo sed -i s/"--with-ipv6    "/"--with-ipv6 \    "/g /usr/local/src/nginx-1.7.7/debian/rules
-sudo sed -i s/"--with-debug "/"--with-debug \\"/g /usr/local/src/nginx-1.7.7/debian/rules
-sudo sed -i s/"\<--\with\-\debug\>"/"\<--\with\-\debug\> /\\"/g /usr/local/src/nginx-1.7.7/debian/rules
-sudo sed -i '/--with-ipv6/a\                --add-module=/usr/local/src/ngx_cache_purge-2.1 \ \' /usr/local/src/nginx-1.7.7/debian/rules
-sudo sed -i '/--with-debug/a\                --add-module=/usr/local/src/ngx_cache_purge-2.1 \ \' /usr/local/src/nginx-1.7.7/debian/rules
-sudo sed -i '/--add-module=/usr/local/src/ngx_cache_purge-2.1 \ \                         --add-module=/usr/local/src/ngx_pagespeed-1.9.32.2-beta \' /usr/local/src/nginx-1.7.7/debian/rules
+## Create rules for compiling ngx_cache_purge and ngx_pagespeed with Nginx
+sed -i '/^\s*--with-ipv6\s*$/{
+a\         --add-module=/usr/local/src/ngx_cache_purge-2.1 \\
+a\         --add-module=/usr/local/src/ngx_pagespeed-1.9.32.2-beta
+c\         --with-ipv6 \\
+}' \
+/usr/local/src/nginx-1.7.7/debian/rules
+
+sed -i '/^\s*--with-debug\s*$/{
+a\         --add-module=/usr/local/src/ngx_cache_purge-2.1 \\
+a\         --add-module=/usr/local/src/ngx_pagespeed-1.9.32.2-beta
+c\         --with-debug \\
+}' \
+/usr/local/src/nginx-1.7.7/debian/rules
 #--------------------------------------------------
 # Set Locale en_US.UTF-8
 #--------------------------------------------------
