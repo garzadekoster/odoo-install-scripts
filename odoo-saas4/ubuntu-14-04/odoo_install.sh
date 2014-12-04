@@ -82,7 +82,7 @@ sudo apt-get install software-properties-common python-software-properties -y
 # Rebuild Libreoffice for Python 2.7 with python-uno
 #----------------------------------------------------
 cd /tmp
-sudo wget https://gist.githubusercontent.com/hbrunn/6f4a007a6ff7f75c0f8b/raw/0429048f101696c1fcccfd6f324b7a6cb71735d0/rebuild_libreoffice.sh
+sudo wget https://gist.githubusercontent.com/lukebranch/16fbc4cb7ac4644c3f63/raw/f71cfd1ec4dc309fa87b5d53b6634badd8ccfc8d/rebuild_libreoffice.sh
 sudo sh rebuild_libreoffice.sh
 
 #--------------------------------------------------
