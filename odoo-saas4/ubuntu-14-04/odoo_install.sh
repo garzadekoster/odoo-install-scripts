@@ -73,6 +73,18 @@ echo -e "\n---- Update Server ----"
 sudo apt-get upgrade -y
 sudo apt-get update -y
 
+#----------------------------------------------------
+# Install software properties for add-apt-repository
+#----------------------------------------------------
+sudo apt-get install software-properties-common python-software-properties -y
+
+#----------------------------------------------------
+# Rebuild Libreoffice for Python 2.7 with python-uno
+#----------------------------------------------------
+cd /tmp
+sudo wget https://gist.githubusercontent.com/hbrunn/6f4a007a6ff7f75c0f8b/raw/0429048f101696c1fcccfd6f324b7a6cb71735d0/rebuild_libreoffice.sh
+sudo sh rebuild_libreoffice.sh
+
 #--------------------------------------------------
 # Install SSH
 #--------------------------------------------------
