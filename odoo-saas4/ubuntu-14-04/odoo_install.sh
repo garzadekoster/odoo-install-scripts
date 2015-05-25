@@ -24,7 +24,7 @@ OE_USER="odoo"
 OE_HOME="/opt/$OE_USER"
 OE_HOME_EXT="/opt/$OE_USER/$OE_USER-server"
 # Replace for openerp-gevent for enabling gevent mode for chat
-OE_SERVERTYPE="openerp-gevent"
+OE_SERVERTYPE="openerp-server"
 
 #Enter version for checkout "7.0" for version 7.0, "saas-4, saas-5 (opendays version) and "master" for trunk
 OE_VERSION="8.0"
@@ -300,21 +300,6 @@ sudo ufw allow 8069
 
 echo -e "* Start ODOO on Startup"
 sudo update-rc.d $OE_CONFIG defaults
-
-echo -e "* cloning design-themes from github.com/odoo/design-themes"
-
-echo -e "* cloning Aeroo_reports repository from github.com/jamotion/aeroo"
-# Clone and setup Jamotion/aeroo.git:
-# cd /opt/odoo/custom/addons
-# git clone https://github.com/jamotion/aeroo.git
-# cd aeroo
-# python setup.py install
-
-# Download depending modules for Aeroo
-# cd /opt/odoo/custom/addons
-# sudo git clone https://github.com/jamotion/report_aeroo.git
-# sudo git clone https://github.com/jamotion/report_aeroo_ooo.git
-# sudo git clone https://github.com/jamotion/report_aeroo_sample.git
 
 echo "Done! The ODOO server can be started with /etc/init.d/$OE_CONFIG"
 echo "Please reboot the server now so that Wkhtmltopdf is working with your install."
