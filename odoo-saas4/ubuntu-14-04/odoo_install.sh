@@ -99,7 +99,7 @@ sudo pip install gdata
 sudo pip install passlib
 
 echo -e "\n---- Install Other Dependencies ----"
-sudo pip install graphviz ghostscript gcc mc bzr lptools make
+sudo pip install graphviz ghostscript mc bzr lptools make
 sudo pip install gevent gevent_psycopg2 psycogreen
 
 echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
