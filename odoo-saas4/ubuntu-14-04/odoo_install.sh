@@ -97,6 +97,7 @@ npm install less -y
 echo -e "\n---- Install python libraries ----"
 sudo pip install gdata
 sudo pip install passlib
+sudo pip install unidecode
 
 echo -e "\n---- Install Other Dependencies ----"
 sudo pip install graphviz mc bzr lptools make
