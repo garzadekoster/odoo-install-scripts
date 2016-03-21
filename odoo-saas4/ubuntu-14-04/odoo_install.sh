@@ -93,6 +93,7 @@ sudo apt-get install -y --force-yes --no-install-recommends python-gevent python
 curl -sL https://deb.nodesource.com/setup | sudo bash -
 sudo apt-get install nodejs -y
 npm install less -y
+npm install less-plugin-clean-css
 
 echo -e "\n---- Install python libraries ----"
 sudo pip install gdata
