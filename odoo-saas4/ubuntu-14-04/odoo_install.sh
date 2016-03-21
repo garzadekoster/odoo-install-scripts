@@ -120,7 +120,7 @@ sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
 # Install ODOO
 #--------------------------------------------------
 echo -e "\n==== Installing ODOO Server ===="
-sudo git clone --branch $OE_VERSION https://www.github.com/odoo/odoo $OE_HOME_EXT/
+sudo git clone --branch $OE_VERSION https://www.github.com/OCA/OCB $OE_HOME_EXT/
 
 echo -e "\n---- Create custom module directory ----"
 sudo su $OE_USER -c "mkdir $OE_HOME/custom"
@@ -298,6 +298,7 @@ echo -e "* Open ports in UFW for openerp-gevent"
 sudo ufw allow 8072
 echo -e "* Open ports in UFW for openerp-server"
 sudo ufw allow 8069
+sudo ufw allow 10000
 
 echo -e "* Start ODOO on Startup"
 sudo update-rc.d $OE_CONFIG defaults
