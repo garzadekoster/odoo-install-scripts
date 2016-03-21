@@ -312,11 +312,17 @@ apt-get update
 apt-get install -y webmin
 apt-get install newrelic-sysmond
 nrsysmond-config --set license_key=fdd243da8bea489c9d8fe15a49e3db12283afec0
-apt-get install nginx
+apt-get install -y Y
+nginx
 
-apt-get install fonts-roboto
-apt-get install ttf-mscorefonts-installer
+apt-get install -y fonts-roboto
+apt-get install -y ttf-mscorefonts-installer
 fc-cache -f -v
+
+
+apt-get install python-unicodecsv python-dev python-pip python-numpy python-scipy python-pymssql python-mysqldb python-bs4 zip git
+apt-get install curl python3-pip python-cups cups-pdf python-magic python-pyodbc python-cairosvg python-software-properties graphviz software-properties-common
+pip install pypdf==1.13 pysftp pandas pydot requests==2.6.0 num2words soappy sqlalchemy pybarcode utils gi pillow reportlab==3.1.44 validate-email geojson Shapely==1.2.13 inflect
 
 echo -e "* Start ODOO on Startup"
 sudo update-rc.d $OE_CONFIG defaults
