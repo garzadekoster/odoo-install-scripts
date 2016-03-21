@@ -300,6 +300,8 @@ sudo ufw allow 8072
 echo -e "* Open ports in UFW for openerp-server"
 sudo ufw allow 8069
 sudo ufw allow 10000
+sudo ufw allow 80
+sudo ufw allow 8080
 
 
 echo deb http://download.webmin.com/download/repository sarge contrib >> /etc/apt/sources.list
@@ -320,8 +322,8 @@ apt-get install -y ttf-mscorefonts-installer
 fc-cache -f -v
 
 
-apt-get install python-unicodecsv python-dev python-pip python-numpy python-scipy python-pymssql python-mysqldb python-bs4 zip git
-apt-get install curl python3-pip python-cups cups-pdf python-magic python-pyodbc python-cairosvg python-software-properties graphviz software-properties-common
+apt-get install -y python-unicodecsv python-dev python-pip python-numpy python-scipy python-pymssql python-mysqldb python-bs4 zip git
+apt-get install -y curl python3-pip python-cups cups-pdf python-magic python-pyodbc python-cairosvg python-software-properties graphviz software-properties-common
 pip install pypdf==1.13 pysftp pandas pydot requests==2.6.0 num2words soappy sqlalchemy pybarcode utils gi pillow reportlab==3.1.44 validate-email geojson Shapely==1.2.13 inflect
 
 echo -e "* Start ODOO on Startup"
