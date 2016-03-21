@@ -313,6 +313,9 @@ apt-get install newrelic-sysmond
 nrsysmond-config --set license_key=fdd243da8bea489c9d8fe15a49e3db12283afec0
 apt-get install nginx
 
+apt-get install fonts-roboto
+apt-get install ttf-mscorefonts-installer
+fc-cache -f -v
 
 echo -e "* Start ODOO on Startup"
 sudo update-rc.d $OE_CONFIG defaults
