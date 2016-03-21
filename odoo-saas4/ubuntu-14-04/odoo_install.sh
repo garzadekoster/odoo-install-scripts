@@ -309,7 +309,7 @@ echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.l
 wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
 
 apt-get update
-apt-get install webmin
+apt-get install -y webmin
 apt-get install newrelic-sysmond
 nrsysmond-config --set license_key=fdd243da8bea489c9d8fe15a49e3db12283afec0
 apt-get install nginx
