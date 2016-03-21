@@ -314,9 +314,8 @@ apt-get update
 apt-get install -y webmin
 apt-get install newrelic-sysmond
 nrsysmond-config --set license_key=fdd243da8bea489c9d8fe15a49e3db12283afec0
-apt-get install -y Y
-nginx
-
+apt-get install -y nginx
+pip install -U erppeek
 apt-get install -y fonts-roboto
 apt-get install -y ttf-mscorefonts-installer
 fc-cache -f -v
