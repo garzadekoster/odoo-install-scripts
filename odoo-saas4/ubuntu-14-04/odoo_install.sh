@@ -300,6 +300,20 @@ echo -e "* Open ports in UFW for openerp-server"
 sudo ufw allow 8069
 sudo ufw allow 10000
 
+
+echo deb http://download.webmin.com/download/repository sarge contrib >> /etc/apt/sources.list
+echo deb http://webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib >> /etc/apt/sources.list
+wget -q http://www.webmin.com/jcameron-key.asc -O- | sudo apt-key add -
+echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list
+wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
+
+apt-get update
+apt-get install webmin
+apt-get install newrelic-sysmond
+nrsysmond-config --set license_key=fdd243da8bea489c9d8fe15a49e3db12283afec0
+apt-get install nginx
+
+
 echo -e "* Start ODOO on Startup"
 sudo update-rc.d $OE_CONFIG defaults
 
