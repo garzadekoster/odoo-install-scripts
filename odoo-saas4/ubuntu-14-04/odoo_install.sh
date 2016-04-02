@@ -324,7 +324,7 @@ fc-cache -f -v
 
 
 apt-get install -y python-unicodecsv python-dev python-pip python-numpy python-scipy python-pymssql python-mysqldb python-bs4 zip git
-apt-get install -y curl python3-pip python-cups cups-pdf python-magic python-pyodbc python-cairosvg python-software-properties graphviz software-properties-common
+apt-get install -y curl python3-pip python-cups cups-pdf python-magic python-pyodbc python-cairosvg python-software-properties graphviz software-properties-common python-nvd3
 pip install pypdf==1.13 pysftp pandas pydot requests==2.6.0 num2words soappy sqlalchemy pybarcode utils gi pillow reportlab==3.1.44 validate-email geojson Shapely==1.2.13 inflect
 
 echo -e "* Start ODOO on Startup"
