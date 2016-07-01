@@ -90,10 +90,11 @@ echo -e "\n---- Install python packages ----"
 sudo apt-get install -y --force-yes --no-install-recommends python-gevent python-dateutil python-feedparser python-gdata python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-pdftools python-setuptools python-pybabel python-imaging python-matplotlib python-reportlab-accel python-openssl python-egenix-mxdatetime python-paramiko antiword python-decorator poppler-utils python-requests libpq-dev python-geoip python-markupsafe postgresql-client python-passlib vim libreoffice curl openssh-server npm python-cairo python-genshi libreoffice-script-provider-python ghostscript
 
 # Install NodeJS and Less compiler needed by Odoo 8 Website - added from https://gist.github.com/rm-jamotion/d61bc6525f5b76245b50
-curl -sL https://deb.nodesource.com/setup | sudo bash -
+curl -sL https://deb.nodesource.com/setup/setup_0.10 | sudo bash -
 sudo apt-get install nodejs -y
 #npm install less -y
 #npm install less-plugin-clean-css
+npm install -g npm 
 npm install -g less less-plugin-clean-css
 
 
@@ -109,6 +110,8 @@ sudo pip install gevent gevent_psycopg2 psycogreen
 echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
 sudo wget http://download.gna.org/wkhtmltopdf/0.12/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
 sudo dpkg -i wkhtmltox-0.12.1_linux-trusty-amd64.deb
+
+echo -e "\n---- Copy library on it place"
 sudo cp /usr/local/bin/wkhtmltopdf /usr/bin
 sudo cp /usr/local/bin/wkhtmltoimage /usr/bin
 	
@@ -128,6 +131,13 @@ sudo git clone --branch $OE_VERSION https://www.github.com/OCA/OCB $OE_HOME_EXT/
 echo -e "\n---- Create custom module directory ----"
 sudo su $OE_USER -c "mkdir $OE_HOME/custom"
 sudo su $OE_USER -c "mkdir $OE_HOME/custom/addons"
+sudo su $OE_USER -c "mkdir $OE_HOME/custom/addons2"
+sudo su $OE_USER -c "mkdir $OE_HOME/custom/addons3"
+sudo su $OE_USER -c "mkdir $OE_HOME/custom/addons4"
+sudo su $OE_USER -c "mkdir $OE_HOME/custom/addons5"
+sudo su $OE_USER -c "mkdir $OE_HOME/custom/addons6"
+sudo su $OE_USER -c "mkdir $OE_HOME/custom/addons7"
+sudo su $OE_USER -c "mkdir $OE_HOME/custom/addons8"
 
 echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
@@ -145,6 +155,7 @@ sudo sed -i s/"db_user = .*"/"db_user = $OE_USER"/g /etc/$OE_CONFIG.conf
 sudo sed -i s/"db_password = .*"/"db_user = False"/g /etc/$OE_CONFIG.conf
 sudo sed -i s/"; admin_passwd.*"/"admin_passwd = $OE_SUPERADMIN"/g /etc/$OE_CONFIG.conf
 sudo su root -c "echo 'addons_path = $OE_HOME_EXT/addons,$OE_HOME/custom/addons' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "#echo 'addons_path = $OE_HOME_EXT/addons,$OE_HOME/custom/addons,$OE_HOME/custom/addons2,$OE_HOME/custom/addons3,$OE_HOME/custom/addons4,$OE_HOME/custom/addons5,$OE_HOME/custom/addons6,$OE_HOME/custom/addons7,$OE_HOME/custom/addons8' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '## Server startup config - Common options' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# Admin password for creating, restoring and backing up databases admin_passwd = admin' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# specify additional addons paths (separated by commas)' >> /etc/$OE_CONFIG.conf"
@@ -306,6 +317,9 @@ sudo ufw allow 80
 sudo ufw allow 8080
 
 
+echo -e "* Install webmin and newrelic as part of admin procedures"
+echo -e "* Then you need to change std port 10000 for something new"
+
 echo deb http://download.webmin.com/download/repository sarge contrib >> /etc/apt/sources.list
 echo deb http://webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib >> /etc/apt/sources.list
 wget -q http://www.webmin.com/jcameron-key.asc -O- | sudo apt-key add -
@@ -322,10 +336,28 @@ apt-get install -y fonts-roboto
 apt-get install -y ttf-mscorefonts-installer
 fc-cache -f -v
 
+sudo pip install phonenumbers 
+sudo pip install --upgrade py-asterisk
+sudo pip install python-nvd3
+sudo pip install validate_email 
+sudo pip install ofxparse
+sudo #pip install csutils 
+sudo pip install xlrd
+sudo pip install http://pypi.python.org/packages/source/o/openobject-library/openobject-library-1.0.1.tar.gz
 
-apt-get install -y python-unicodecsv python-dev python-pip python-numpy python-scipy python-pymssql python-mysqldb python-bs4 zip git
-apt-get install -y curl python3-pip python-cups cups-pdf python-magic python-pyodbc python-cairosvg python-software-properties graphviz software-properties-common python-nvd3
-pip install pypdf==1.13 pysftp pandas pydot requests==2.6.0 num2words soappy sqlalchemy pybarcode utils gi pillow reportlab==3.1.44 validate-email geojson Shapely==1.2.13 inflect
+
+sudo apt-get install -y python-unicodecsv python-dev python-pip python-numpy python-scipy python-pymssql python-mysqldb python-bs4 zip git
+sudo apt-get install -y curl python3-pip python-cups cups-pdf python-magic python-pyodbc python-cairosvg python-software-properties graphviz software-properties-common python-nvd3
+sudo pip install pypdf==1.13 pysftp pandas pydot requests==2.6.0 num2words soappy sqlalchemy pybarcode utils gi pillow reportlab==3.1.44 validate-email geojson Shapely==1.2.13 inflect
+
+cd /tmp
+sudo wget https://raw.githubusercontent.com/OdooCommunityWidgets/install-scripts/8.0/aeroo_reports/aeroo_install.sh
+sudo sh aeroo_install.sh
+
+
+
+
+
 
 echo -e "* Start ODOO on Startup"
 sudo update-rc.d $OE_CONFIG defaults
